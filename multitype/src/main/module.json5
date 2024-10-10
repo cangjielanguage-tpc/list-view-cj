@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "multitype",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}
