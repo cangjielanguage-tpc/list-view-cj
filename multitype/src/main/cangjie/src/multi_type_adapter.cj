@@ -31,23 +31,14 @@ import ohos.component.LazyForEach
 import ohos.component.FakeComponent
 import ohos.component.EdgeEffect
 import ohos.base.*
+import ohos.hilog.*
 import cj_res_multitype.app
 import std.collection.ArrayList
 
+class MultiTypeItemDataSource <: IDataSource<Any> {
+    let data_: ArrayList<Any>
 
-/**
- * @brief IMultiTypeItem interface, an interface for implementing multiple types of entities.
- * 
- * @version 1.0.0
- * @since cangjie-build-support-1.0.5
- */
-public interface IMultiTypeItem {
-}
-
-class MultiTypeItemDataSource <: IDataSource<IMultiTypeItem> {
-    let data_: ArrayList<IMultiTypeItem>
-
-    public init(data: ArrayList<IMultiTypeItem>) {
+    public init(data: ArrayList<Any>) {
         this.data_ = data.clone()
     }
 
@@ -57,7 +48,7 @@ class MultiTypeItemDataSource <: IDataSource<IMultiTypeItem> {
         return data_.size
     }
 
-    public func getData(index: Int64): IMultiTypeItem {
+    public func getData(index: Int64): Any {
         return data_[index]
     }
 
@@ -76,8 +67,13 @@ class MultiTypeItemDataSource <: IDataSource<IMultiTypeItem> {
             }
         }
     }
-}
 
+    public func notifyChanges(): Unit {
+        if (let Some(v) <- this.listener) {
+            v.onDataReloaded()
+        }
+    }
+}
 
 /**
  * @brief List of multiple types of project data
@@ -86,61 +82,61 @@ class MultiTypeItemDataSource <: IDataSource<IMultiTypeItem> {
  * @since cangjie-build-support-1.0.5
  * @author liyanqing14
  */
-public class MultiTypeItemDataList <: Collection<IMultiTypeItem> {
+public class MultiTypeArrayList <: Collection<Any> {
     var data: MultiTypeItemDataSource
 
     /**
-     * @brief Construct a MultiTypeItemDataList with an initial capacity size of default 16
+     * @brief Construct a MultiTypeArrayList with an initial capacity size of default 16
      *
      * @since cangjie-build-support-1.0.5
      */
     public init() {
-        this.data = MultiTypeItemDataSource(ArrayList<IMultiTypeItem>())
+        this.data = MultiTypeItemDataSource(ArrayList<Any>())
     }
 
     /**
-     * @brief Construct a MultiTypeItemDataList that contains all elements in the specified array.
+     * @brief Construct a MultiTypeArrayList that contains all elements in the specified array.
      *
      * @param data Specify array
      * @since cangjie-build-support-1.0.5
      */
-    public init(data: ArrayList<IMultiTypeItem>) {
+    public init(data: ArrayList<Any>) {
         this.data = MultiTypeItemDataSource(data)
     }
 
     /**
-     * @brief Construct a MultiTypeItemDataList with a specified initial number of elements and a specified rule function. This constructor sets the capacity of MultiTypeItemDataList based on the parameter size.
+     * @brief Construct a MultiTypeArrayList with a specified initial number of elements and a specified rule function. This constructor sets the capacity of MultiTypeArrayList based on the parameter size.
      *
      * @param size capacity
      * @param initElement Specify rule function
      * @since cangjie-build-support-1.0.5
      */
-    public init(size: Int64, initElement: (Int64) -> IMultiTypeItem) {
-        this.data = MultiTypeItemDataSource(ArrayList<IMultiTypeItem>(size, initElement))
+    public init(size: Int64, initElement: (Int64) -> Any) {
+        this.data = MultiTypeItemDataSource(ArrayList<Any>(size, initElement))
     }
 
     /**
-     * @brief Construct a MultiTypeItemDataList that contains all elements in the specified array.
+     * @brief Construct a MultiTypeArrayList that contains all elements in the specified array.
      *
      * @param elements Specify array
      * @since cangjie-build-support-1.0.5
      */
-    public init(elements: Array<IMultiTypeItem>) {
-        this.data = MultiTypeItemDataSource(ArrayList<IMultiTypeItem>(elements))
+    public init(elements: Array<Any>) {
+        this.data = MultiTypeItemDataSource(ArrayList<Any>(elements))
     }
 
     /**
-     * @brief Construct a MultiTypeItemDataList that contains all elements in the specified array.
+     * @brief Construct a MultiTypeArrayList that contains all elements in the specified array.
      *
      * @param elements Specify array
      * @since cangjie-build-support-1.0.5
      */
-    public init(elements: Collection<IMultiTypeItem>) {
-        this.data = MultiTypeItemDataSource(ArrayList<IMultiTypeItem>(elements))
+    public init(elements: Collection<Any>) {
+        this.data = MultiTypeItemDataSource(ArrayList<Any>(elements))
     }
 
     /**
-     * @brief Check if MultiTypeItemDataList is empty.
+     * @brief Check if MultiTypeArrayList is empty.
      * 
      * @since cangjie-build-support-1.0.5
      */
@@ -149,11 +145,11 @@ public class MultiTypeItemDataList <: Collection<IMultiTypeItem> {
     }
 
     /**
-     * @brief Return the iterators of the elements in this MultiTypeItemDataList.
+     * @brief Return the iterators of the elements in this MultiTypeArrayList.
      * 
      * @since cangjie-build-support-1.0.5
      */
-    public override func iterator(): Iterator<IMultiTypeItem> {
+    public override func iterator(): Iterator<Any> {
         return this.data.data_.clone().iterator()
     }
 
@@ -162,35 +158,36 @@ public class MultiTypeItemDataList <: Collection<IMultiTypeItem> {
     }
 
     /**
-     * @brief Delete the element at the specified position in this MultiTypeItemDataList.
+     * @brief Delete the element at the specified position in this MultiTypeArrayList.
      * 
      * @param i
      * @since cangjie-build-support-1.0.5
      */
-    public func remove(i: Int64) {
-        this.data.data_.remove(i)
+    public func remove(i: Int64): Any {
+        let t = this.data.data_.remove(i)
         this.data.notifyChange(i)
+        return t
     }
 
     /**
-     * @brief Insert the specified element at the designated location in this MultiTypeItemDataList.
+     * @brief Insert the specified element at the designated location in this MultiTypeArrayList.
      * 
      * @param i
      * @param item
      * @since cangjie-build-support-1.0.5
      */
-    public func insert(i: Int64, item: IMultiTypeItem) {
+    public func insert(i: Int64, item: Any) {
         this.data.data_.insert(i, item)
         this.data.notifyChange(i)
     }
 
     /**
-     * @brief Append the specified element to the end of this MultiTypeItemDataList.
+     * @brief Append the specified element to the end of this MultiTypeArrayList.
      * 
      * @param item
      * @since cangjie-build-support-1.0.5
      */
-    public func append(item: IMultiTypeItem) {
+    public func append(item: Any) {
         this.data.data_.append(item)
         this.data.notifyChange(this.size)
     }
@@ -202,7 +199,7 @@ public class MultiTypeItemDataList <: Collection<IMultiTypeItem> {
      * @param value
      * @since cangjie-build-support-1.0.5
      */
-    public operator func [](i: Int64, value!: IMultiTypeItem): Unit {
+    public operator func [](i: Int64, value!: Any): Unit {
         this.data.data_[i] = value
         this.data.notifyChange(i)
     }
@@ -213,7 +210,7 @@ public class MultiTypeItemDataList <: Collection<IMultiTypeItem> {
      * @param index
      * @since cangjie-build-support-1.0.5
      */
-    public operator func [](index: Int64): IMultiTypeItem {
+    public operator func [](index: Int64): Any {
         this.data.data_[index]
     }
 
@@ -222,21 +219,123 @@ public class MultiTypeItemDataList <: Collection<IMultiTypeItem> {
      * 
      * @since cangjie-build-support-1.0.5
      */
-    public override func toArray(): Array<IMultiTypeItem> {
+    public override func toArray(): Array<Any> {
         return this.data.data_.toArray()
+    }
+
+    /**
+     * @brief Clear all data.
+     *
+     * @since cangjie-build-support-1.0.5
+     */
+    public func clear(): Unit {
+        this.data.data_.clear()
+        this.data.notifyChanges()
     }
 }
 
 
+/**
+ * @brief MultiTypeAdapter class, multi type adapter.
+ *
+ * @version 1.0.0
+ * @since cangjie-build-support-1.0.5
+ * @author liyanqing14
+ */
 @Component
 public class MultiTypeAdapter {
-    var array: MultiTypeItemDataList
+
+    /**
+     * @brief Create a Multitype collection type.
+     *
+     * @return MultiTypeArrayList
+     * @since cangjie-build-support-1.0.5
+     */
+    public static func createArray(): MultiTypeArrayList{
+        return MultiTypeArrayList()
+    }
+
+    /**
+     * @brief Create a Multitype collection type.
+     *
+     * @parm data data source
+     * @return MultiTypeArrayList
+     * @since cangjie-build-support-1.0.5
+     */
+    public static func createArray(data: ArrayList<Any>){
+        return MultiTypeArrayList(data)
+    }
+
+    /**
+     * @brief Create a Multitype collection type.
+     *
+     * @parm elements data source
+     * @return MultiTypeArrayList
+     * @since cangjie-build-support-1.0.5
+     */
+    public static func createArray(elements: Array<Any>){
+        return MultiTypeArrayList(elements)
+    }
+
+    /**
+     * @brief Create a Multitype collection type.
+     *
+     * @parm elements data source
+     * @return MultiTypeArrayList
+     * @since cangjie-build-support-1.0.5
+     */
+    public static func createArray(elements: Collection<Any>){
+        return MultiTypeArrayList(elements)
+    }
+
+    /**
+     * @brief Create a Multitype collection type.
+     *
+     * @parm size length
+     * @parm initElement Initialization function
+     * @return MultiTypeArrayList
+     * @since cangjie-build-support-1.0.5
+     */
+    public static func createArray(size: Int64, initElement: (Int64) -> Any){
+        return MultiTypeArrayList(size, initElement)
+    }
+
+    /**
+     * @brief Convert (T, Int64) ->Unit function type to (Any, Int64) ->Unit.
+     *
+     * @parm fun (CustomView, ObservedProperty < T >, ObservedProperty < Int64 >) -> ViewBuilder
+     * @return callback (CustomView, ObservedProperty < Any >, ObservedProperty < Int64 >) -> ViewBuilder
+     * @since cangjie-build-support-1.0.5
+     */
+    public static func convertType<T>
+    (
+        fun: (CustomView, ObservedProperty < T >, ObservedProperty < Int64 >) -> ViewBuilder
+    ):
+        (CustomView, ObservedProperty < Any >, ObservedProperty < Int64 >) -> ViewBuilder
+    {
+        func f1__inner__(thisView: CustomView, item: ObservedProperty < Any >, i: ObservedProperty < Int64 >): ViewBuilder {
+            return fun(thisView, ObservedProperty("", (item.get() as T).getOrThrow()), i)
+        }
+        return f1__inner__
+    }
+
+    var array: MultiTypeArrayList
 
     @BuilderParam
-    var child: (IMultiTypeItem, Int64) -> Unit
+    var child: (Any, Int64) -> Unit
 
     @Prop
     var attribute: Attributes
+
+    protected func aboutToDisappear() {
+        try {
+            if (this.array.data.data_.size != 0) {
+                this.array.data.data_.clear()
+            }
+        } catch (_) {
+            ()
+        }
+    }
 
     func build() {
         Column {
@@ -247,7 +346,7 @@ public class MultiTypeAdapter {
                 LazyForEach(
                     this.array.data,
                     itemGeneratorFunc: {
-                        item: IMultiTypeItem, i: Int64 =>
+                        item: Any, i: Int64 =>
                         ListItem() { =>
                             this.child(item, i)
                         }

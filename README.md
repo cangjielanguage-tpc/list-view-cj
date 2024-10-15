@@ -14,10 +14,11 @@
 
 multitype4cj 为list组件创建多种条目类型的UI组件库.
 
-### 效果展示
+## 效果展示
+<img height="400" src="doc/png/Example1.png"/>  <img height="400" src="doc/png/Example2.png"/>  <img height="400" src="doc/png/Example3.png"/>
+<img height="400" src="doc/png/Example4.png"/>  <img height="400" src="doc/png/Example5.png"/>  <img height="400" src="doc/png/Example6.png"/>
 
-
-### 特性
+## 特性
 
 - 组件基础属性
 - 列表项间距
@@ -56,7 +57,7 @@ multitype4cj 为list组件创建多种条目类型的UI组件库.
 
 ### 功能示例
 
-用例代码在entry目录下 [功能示例](entry/src/main/cangjie/src/index.cj)
+用例代码在entry目录下 [功能示例](entry/src/main/cangjie/src/listpage2/listpage_2.cj)
 
 ## 约束与限制
 1. 在下述版本验证通过：

@@ -3,27 +3,12 @@
  */
 
 package ohos_app_cangjie_entry.one2many
-import ohos.component.Column
-import ohos.component.Text
-import ohos.component.Button
-import ohos.component.ViewBuilder
-import ohos.component.CustomView
-import ohos.component.CJEntry
-import ohos.component.HorizontalAlign
-import ohos.component.loadNativeView
-import ohos.state_manage.LocalStorage
-import ohos.state_manage.ObservedProperty
-import ohos.state_manage.SubscriberManager
 import ohos.base.*
-import ohos.state_macro_manage.Entry
-import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Component
-import ohos.state_macro_manage.Builder
-import ohos.state_manage.ViewStackProcessor
-import ohos.component.LegalCallCheck
+import ohos.component.*
+import ohos.state_manage.*
+import ohos.state_macro_manage.*
 import std.collection.ArrayList
-import multitype.IMultiTypeItem
-import multitype.MultiTypeItemDataList
+import multitype.MultiTypeArrayList
 import multitype.MultiTypeAdapter
 import multitype.Attributes
 
@@ -32,7 +17,7 @@ import ohos.router.*
 
 import ohos_app_cangjie_entry.common.*
 
-class ItemsType <: IMultiTypeItem {
+class ItemsType {
     public var itemType: Int64 = 0
     public var id: Int64 = 0
     public init(itemType: Int64, id: Int64) {
@@ -45,7 +30,7 @@ class ItemsType <: IMultiTypeItem {
 @Component
 class OneDataToManPage {
 
-    var items: MultiTypeItemDataList = unsafe {zeroValue<MultiTypeItemDataList>()}
+    var items: MultiTypeArrayList = MultiTypeAdapter.createArray()
 
     @State
     var index: Int64= 0
@@ -58,7 +43,6 @@ class OneDataToManPage {
                 )
 
     protected func aboutToAppear(){
-        this.items = MultiTypeItemDataList()
         var num: Int64 = 0;
         while (num < 30) {
             if (num % 2 == 0) {
@@ -71,7 +55,7 @@ class OneDataToManPage {
     }
 
     @Builder
-    func f1(item: IMultiTypeItem, i: Int64) {
+    func f1(item: Any, i: Int64) {
         Column() {
             Text("title: ${(item as ItemsType).getOrThrow().id}, id:${i}")
                 .fontSize(16)
