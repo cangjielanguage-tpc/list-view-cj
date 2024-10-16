@@ -3,47 +3,21 @@
  */
 
 package ohos_app_cangjie_entry.common
-import ohos.component.Column
-import ohos.component.Text
-import ohos.component.Blank
-import ohos.component.Image
-import ohos.component.ImageFit
-import ohos.component.Row
-import ohos.component.Button
-import ohos.component.ViewBuilder
-import ohos.component.CustomView
-import ohos.component.CJEntry
-import ohos.component.HorizontalAlign
-import ohos.component.loadNativeView
-import ohos.component.CustomDialogController
-import ohos.component.CustomDialogControllerOptions
-import ohos.component.Offset
-import ohos.component.DialogAlignment
-import ohos.state_manage.LocalStorage
-import ohos.state_manage.ObservedProperty
-import ohos.state_manage.SubscriberManager
 import ohos.base.*
-import ohos.state_macro_manage.CustomDialog
-import ohos.state_macro_manage.Entry
-import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Component
-import ohos.state_macro_manage.Builder
-import ohos.state_macro_manage.r
-import ohos.state_manage.ViewStackProcessor
-import ohos.component.LegalCallCheck
-import std.collection.ArrayList
-import multitype.IMultiTypeItem
-import multitype.MultiTypeAdapter
-import multitype.Attributes
+import ohos.component.*
+import ohos.state_manage.*
+import ohos.state_macro_manage.*
+protected import std.collection.ArrayList
+protected import multitype.MultiTypeAdapter
+protected import multitype.Attributes
+protected import encoding.json.JsonValue
+protected import encoding.json.ToJson
+protected import encoding.json.JsonString
+protected import serialization.serialization.DataModel
+protected import ohos.hilog.*
+protected import ohos.router.*
 
-import encoding.json.JsonValue
-import encoding.json.ToJson
-import encoding.json.JsonString
-import serialization.serialization.DataModel
-import ohos.hilog.*
-import ohos.router.*
-
-import cj_res_entry.app
+protected import cj_res_entry.app
 
 @Component
 public class TitleBar {
@@ -95,12 +69,12 @@ class MyDialog {
         Column {
             Text("NormalPage").fontSize(18).padding(15)
               .onClick({event =>
-                Router.push(url:"pages/normal/NormalPage"
+                Router.push(url:"NormalPage"
                 )
               })
               Text("MultiSelectablePage").fontSize(18).padding(15)
                 .onClick({event =>
-                  Router.push(url:"pages/selectable/MultiSelectablePage"
+                  Router.push(url:"Index"
                   )
                 })
               Text("CommunicateWithPage").fontSize(18).padding(15)
@@ -108,14 +82,14 @@ class MyDialog {
                   Router.push(url:"pages/communication/CommunicateWithBinderPage"
                   )
                 })
-              Text("BilibiliPage").fontSize(18).padding(15)
+              Text("ListPage").fontSize(18).padding(15)
                 .onClick({event =>
-                  Router.push(url:"pages/bilibili/BilibiliPage"
+                  Router.push(url:"ListPage"
                   )
                 })
-              Text("WeiboPage").fontSize(18).padding(15)
+              Text("ListPage2").fontSize(18).padding(15)
                 .onClick({event =>
-                  Router.push(url:"WeiboPage"
+                  Router.push(url:"ListPage2"
                   )
                 })
               Text("OneDataToManyPage").fontSize(18).padding(15)
@@ -125,12 +99,12 @@ class MyDialog {
                 })
               Text("TestPayloadPage").fontSize(18).padding(15)
                 .onClick({event =>
-                  Router.push(url:"pages/payload/TestPayloadPage"
+                  Router.push(url:"TestPayloadPage"
                   )
                 })
               Text("MoreApisPlaygroundPage").fontSize(18).padding(15)
                 .onClick({event =>
-                  Router.push(url:"pages/more/MoreApisPlaygroundPage"
+                  Router.push(url:"MoreApisPlayground"
                   )
                 })
         }

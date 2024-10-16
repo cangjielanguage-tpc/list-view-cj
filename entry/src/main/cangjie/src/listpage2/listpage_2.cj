@@ -2,40 +2,15 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 
-package ohos_app_cangjie_entry.weibo
-import ohos.component.Column
-import ohos.component.Text
-import ohos.component.Row
-import ohos.component.If
-import ohos.component.Blank
-import ohos.component.Image
-import ohos.component.ImageFit
-import ohos.component.ImageRenderMode
-import ohos.component.Button
-import ohos.component.ViewBuilder
-import ohos.component.FontWeight
-import ohos.component.CustomView
-import ohos.component.VerticalAlign
-import ohos.component.CJEntry
-import ohos.component.HorizontalAlign
-import ohos.component.loadNativeView
-import ohos.state_manage.LocalStorage
-import ohos.state_manage.ObservedProperty
-import ohos.state_manage.SubscriberManager
+package ohos_app_cangjie_entry.listpage2
 import ohos.base.*
-import ohos.state_macro_manage.Entry
-import ohos.state_macro_manage.Prop
-import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Component
-import ohos.state_macro_manage.r
-import ohos.state_macro_manage.Builder
-import ohos.state_manage.ViewStackProcessor
-import ohos.component.LegalCallCheck
+import ohos.component.*
+import ohos.state_manage.*
+import ohos.state_macro_manage.*
 import std.collection.ArrayList
-import multitype.IMultiTypeItem
 import multitype.MultiTypeAdapter
 import multitype.Attributes
-import multitype.MultiTypeItemDataList
+import multitype.MultiTypeArrayList
 import ohos.webview.WebviewController
 
 import ohos.hilog.*
@@ -59,7 +34,7 @@ class ContentType {
         this.content_type = content_type
     }
 }
-class ItemsType <: IMultiTypeItem {
+class ItemsType {
     var content: ContentType
     var createTime: String
     var user: UserType
@@ -73,8 +48,8 @@ class ItemsType <: IMultiTypeItem {
 
 @Entry
 @Component
-class WeiboPage {
-    var items: MultiTypeItemDataList = unsafe {zeroValue<MultiTypeItemDataList>()}
+class ListPage2 {
+    var items: MultiTypeArrayList = MultiTypeAdapter.createArray()
 
     @State
     var deleteItem: Bool = false
@@ -87,7 +62,6 @@ class WeiboPage {
                 )
 
     protected func aboutToAppear(){
-        this.items = MultiTypeItemDataList()
         var num = 0
         while (num < 100) {
             if (num %2 ==0) {
@@ -117,9 +91,8 @@ class WeiboPage {
         }
     }
 
-
     @Builder
-    func f1(item: IMultiTypeItem, i: Int64) {
+    func f1(item: Any, i: Int64) {
             Row() {
               Image(@r(app.media.avatar_drakeet))
                 .objectFit(ImageFit.Cover)
