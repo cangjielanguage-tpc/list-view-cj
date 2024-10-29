@@ -56,10 +56,10 @@ public class NormalPage {
             Text(t.name).fontSize(16).fontColor(Color.GRAY)
             Image(t.path)
             .objectFit(ImageFit.Contain)
-            .height(90)
-            .width(100.percent)
+//            .height(90)
+//            .width(100.percent)
             .renderMode(ImageRenderMode.Original)
-        }
+        }.backgroundColor(Color(0x123456))
     }
 
     func build() {
@@ -73,10 +73,10 @@ public class NormalPage {
                         rightPadding: 1,
                         bottomPadding: 1,
                         leftPadding: 1,
-                        topMargin: 1,
-                        rightMargin: 1,
-                        bottomMargin: 1,
-                        leftMargin: 1,
+                        topMargin: 100,
+                        rightMargin: 100,
+                        bottomMargin: 100,
+                        leftMargin: 100,
                         space: 2,
                         initialIndex: 0,
                         dividerStrokeWidth: 0.vp,
@@ -88,7 +88,9 @@ public class NormalPage {
                         edgeEffect: EdgeEffect.Spring,
                         chainAnimation: true,
                         sticky: Sticky.Normal,
-                        backgroundColor: Color.WHITE
+                        width: -360,
+                        height: -460,
+                        backgroundColor: Color.BLACK
                 )
             )
         }
