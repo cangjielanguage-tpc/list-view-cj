@@ -60,7 +60,7 @@ public class MultiTypeAdapter {
     /*
      * 功能 - (静态函数) 转换 (T, Int64) -> Unit函数类型 到 (Any, Int64) -> Unit
      * 
-     * 参数 index - 泛型T的回调函数。
+     * 参数 fun - 泛型T的回调函数。
      * 返回值 (Any, Int64) -> Unit - 回调函数
      */
     public static func convertType<T>(fun: (T, Int64) -> Unit) : (Any, Int64) -> Unit
@@ -82,12 +82,12 @@ public class Attributes  {
      * 参数 rightPadding - 右内边距，组件内元素距组件右边界的尺寸。
      * 参数 bottomPadding - 下内边距，组件内元素距组件底部的尺寸。
      * 参数 leftPadding - 左内边距，组件内元素距组件左边界的尺寸。
-     * 参数 topMargin - 上内边距，组件顶部距组件外元素的尺寸。
-     * 参数 rightMargin - 右内边距，组件右边界距组件外元素的尺寸。
-     * 参数 bottomMargin - 下内边距，组件底部距组件外元素的尺寸。
-     * 参数 leftMargin - 左内边距，组件左边界距组件外元素的尺寸。
+     * 参数 topMargin - 上外边距，组件顶部距组件外元素的尺寸。
+     * 参数 rightMargin - 右外边距，组件右边界距组件外元素的尺寸。
+     * 参数 bottomMargin - 下外边距，组件底部距组件外元素的尺寸。
+     * 参数 leftMargin - 左外边距，组件左边界距组件外元素的尺寸。
      * 参数 space - List构造函数中参数space的值, 列表项间距。
-     * 参数 initialIndex - List构造函数中参数initialIndex的值, ist内容长度需要超过list容器长度时生效。
+     * 参数 initialIndex - List构造函数中参数initialIndex的值, list内容长度需要超过list容器长度时生效。
      * 参数 dividerStrokeWidth - 用于设置ListItem分割线样式, 分割线的线宽。
      * 参数 dividerColor - 用于设置ListItem分割线样式, 分割线的颜色, 默认黑色。
      * 参数 dividerStartMargin - 用于设置ListItem分割线样式, 分割线距离列表侧边起始端的距离。
@@ -96,7 +96,6 @@ public class Attributes  {
      * 参数 editMode - 设置当前List组件是否处于可编辑模式。
      * 参数 edgeEffect - 设置组件的滑动效果。
      * 参数 chainAnimation - 设置当前List是否启用链式联动动效，开启后列表滑动以及顶部和底部拖拽时会有链式联动的效果。
-     * 参数 onItemDelete - 当List组件在编辑模式时，点击ListItem右边出现的删除按钮时触发。
      * 参数 onScrollIndex - 列表滑动时触发，获取滑动起始位置索引值和滑动结束位置索引值。
      * 参数 sticky - 设置List组件中的ListItem是否为吸顶item，以及其吸顶消失的效果。
      * 参数 width - 宽度
@@ -122,7 +121,6 @@ public class Attributes  {
         editMode!: Bool = false,
         edgeEffect!: EdgeEffect = EdgeEffect.None,
         chainAnimation!: Bool = false,
-        onItemDelete!: Option <(index: Int32) -> Bool >= None,
         onScrollIndex!: Option <(firstIndex: Int64,
         lastInde: Int64) -> Unit >= None,
         sticky!: Sticky = Sticky.None,

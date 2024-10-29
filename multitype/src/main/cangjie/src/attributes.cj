@@ -8,7 +8,7 @@ import ohos.component.Axis
 import ohos.component.EdgeEffect
 import ohos.component.Sticky
 import ohos.base.*
-
+import std.math.abs
 
 /**
  * @brief The setting property class of MultiTypeAdapter component
@@ -35,7 +35,6 @@ public class Attributes {
     var editMode: Bool //是否处于可编辑模式
     var edgeEffect: EdgeEffect //滑动效果
     var chainAnimation: Bool //是否启用链式联动动效
-    var onItemDelete: Option<(index: Int32) -> Bool> //列表项删除时触发
     var onScrollIndex: Option<(firstIndex: Int64, lastIndex: Int64) -> Unit> //当前列表显示的起始位置和终止位置发生变化时触发
     var sticky: Sticky //吸顶效果
     var width: Option<Int64>
@@ -93,7 +92,6 @@ public class Attributes {
             editMode!: Bool = false,
             edgeEffect!: EdgeEffect = EdgeEffect.None,
             chainAnimation!: Bool = false,
-            onItemDelete!: Option <(index: Int32) -> Bool > = None,
             onScrollIndex!: Option<(firstIndex: Int64, lastInde: Int64) -> Unit> = None,
             sticky!: Sticky = Sticky.None,
             width!: Option < Int64 > = None,
@@ -118,11 +116,18 @@ public class Attributes {
         this.editMode = editMode
         this.edgeEffect = edgeEffect
         this.chainAnimation = chainAnimation
-        this.onItemDelete = onItemDelete
         this.onScrollIndex = onScrollIndex
         this.sticky = sticky
-        this.width = width
-        this.height = height
+        this.width = if (let Some (v) <- width) {
+            abs(v)
+        } else {
+            width
+        }
+        this.height = if (let Some (v) <- height) {
+            abs(v)
+        } else {
+            height
+        }
         this.backgroundColor = backgroundColor
     }
 }

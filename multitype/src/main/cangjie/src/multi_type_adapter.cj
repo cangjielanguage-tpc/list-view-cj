@@ -370,13 +370,6 @@ public class MultiTypeAdapter {
                 }
             }) //列表滑动时触发，获取滑动起始位置索引值和滑动结束位置索引值。
             .editMode(this.attribute.editMode)  //设置当前List组件是否处于可编辑模式。
-            .onItemDelete ({index =>
-                    if (let Some(vv) <- this.attribute.onItemDelete) {
-                        vv(index)
-                    }
-                    return true
-                }
-            )  //当List组件在编辑模式时，点击ListItem右边出现的删除按钮时触发。
             .width (this.attribute.width)
             .height(this.attribute.height)
             .padding(
