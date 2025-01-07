@@ -38,6 +38,7 @@ public class PostList {
         this.posts = posts
     }
 }
+
 @Entry
 @Component
 public class ListPage {
@@ -119,12 +120,18 @@ class MoreGrid {
             Grid(scroller) {
                 ForEach(this.posts.toArray(),
                     itemGeneratorFunc: {item: Any, i: Int64 =>
-                        Column() {
+                        GridItem  {
                             Image((item as Post).getOrThrow().res)
                             .objectFit(ImageFit.Contain)
                             .height(90)
                             .width(100.percent)
                             .renderMode(ImageRenderMode.Original)
+                        }
+                        .width(100.percent)
+                        .height(130)
+                        .margin(left: 15, right: 15)
+                        .backgroundColor(Color.WHITE)
+                        GridItem  {
                             Text((item as Post).getOrThrow().title)
                             .width(180)
                             .fontSize(15)

@@ -1,5 +1,5 @@
 <div align="center">
-<h1>multitype4cj</h1>
+<h1>list-view-cj</h1>
 </div>
 
 <p align="center">
@@ -12,7 +12,7 @@
 
 ## 介绍
 
-multitype4cj 为list组件创建多种条目类型的UI组件库.
+list-view-cj 为list组件创建多种条目类型的UI组件库.
 
 ## 效果展示
 <img height="400" src="doc/png/Example1.png"/>  <img height="400" src="doc/png/Example2.png"/>  <img height="400" src="doc/png/Example3.png"/>
