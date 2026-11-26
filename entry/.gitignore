@@ -4,3 +4,8 @@
 /build
 /.cxx
 /.test
+oh-package-lock.json5
+*/ability_mainability_entry.cj
+*/module_entry_entry.cj
+**/IDL_Dependencies_List~
+**/build-script-cache

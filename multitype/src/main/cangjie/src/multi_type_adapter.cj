@@ -32,7 +32,6 @@ import ohos.component.FakeComponent
 import ohos.component.EdgeEffect
 import ohos.base.*
 import ohos.hilog.*
-import cj_res_multitype.app
 import std.collection.ArrayList
 
 class MultiTypeItemDataSource <: IDataSource<Any> {
@@ -164,7 +163,7 @@ public class MultiTypeArrayList <: Collection<Any> {
      * @since cangjie-build-support-1.0.5
      */
     public func remove(i: Int64): Any {
-        let t = this.data.data_.remove(i)
+        let t = this.data.data_.remove(at: i)
         this.data.notifyChange(i)
         return t
     }
@@ -177,7 +176,7 @@ public class MultiTypeArrayList <: Collection<Any> {
      * @since cangjie-build-support-1.0.5
      */
     public func insert(i: Int64, item: Any) {
-        this.data.data_.insert(i, item)
+        this.data.data_.add(item, at: i)
         this.data.notifyChange(i)
     }
 
@@ -188,7 +187,7 @@ public class MultiTypeArrayList <: Collection<Any> {
      * @since cangjie-build-support-1.0.5
      */
     public func append(item: Any) {
-        this.data.data_.append(item)
+        this.data.data_.add(item)
         this.data.notifyChange(this.size)
     }
 
