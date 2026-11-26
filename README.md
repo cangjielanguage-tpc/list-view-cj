@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.0.0-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.53.12-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.1.3-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-0%25-red" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -52,7 +52,7 @@ list-view-cj 为list组件创建多种条目类型的UI组件库.
 
 ### 编译运行
 
-    HarmonyOS NEXT Beta1 SDK, based on OpenHarmony SDK Ohos_sdk_public 5.0.0.71 (API Version 12 Release)
+    HarmonyOS NEXT Beta1 SDK, based on OpenHarmony SDK Ohos_sdk_public 6.1.1.280 (API Version 24 Release)
 
 ### 功能示例
 
@@ -61,10 +61,9 @@ list-view-cj 为list组件创建多种条目类型的UI组件库.
 ## 约束与限制
 1. 在下述版本验证通过：
 
-- DevEco Studio: 5.0.3.900
-- Cangjie support Plugin: 5.0.3.900
-- cangjie UI: B109
+    DevEco Studio 6.1.1 Release(6.1.1.280)
 
+- SdkVersion需使用20及以上版本
 
 ## 开源协议
 
